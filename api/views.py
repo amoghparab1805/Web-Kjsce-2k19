@@ -37,6 +37,6 @@ class SignUp(APIView):
         token = response.json()
         return JsonResponse({
             'Success': 'Success',
-            'user': user.first_name, # TODO : Make serializer for user
+            'user': user.username, # TODO : Make serializer for user
             'token': token["auth_token"]
         })
