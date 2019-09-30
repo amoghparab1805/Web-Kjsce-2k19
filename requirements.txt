@@ -1,5 +1,5 @@
 django
-djangorestframework
+djangorestframework==3.9.0
 pyrebase
 django-extensions
 django-cors-headers
