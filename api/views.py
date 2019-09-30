@@ -33,7 +33,7 @@ class SignUp(APIView):
                 provider_id=provider_id
             )
             user.save()
-        response = requests.post("https://red-hat-pirates/api/auth/token/login/", data={'username':username, 'password':password})
+        response = requests.post("https://red-hat-pirates.herokuapp.com/api/auth/token/login/", data={'username':username, 'password':password})
         token = response.json()
         return JsonResponse({
             'Success': 'Success',
