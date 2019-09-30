@@ -5,3 +5,5 @@ django-extensions
 django-cors-headers
 requests
 djoser
+gunicorn==19.7.1
+whitenoise==3.3.1
