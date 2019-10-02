@@ -13,17 +13,17 @@ class SignUp(APIView):
     def post(self, request, *args, **kwargs):
         data = request.data
         username = data['uid']
-        display_name = data['providerData']['displayName']
-        email = data['providerData']['email']
-        phone_number = data['providerData']['phoneNumber']
-        photo_url = data['providerData']['photoURL']
-        provider_id = data['providerData']['providerId']
+        display_name = data['providerData'][0]['displayName']
+        email = data['providerData'][0]['email']
+        phone_number = data['providerData'][0]['phoneNumber']
+        photo_url = data['providerData'][0]['photoURL']
+        provider_id = data['providerData'][0]['providerId']
         password = "pass@123"
         hashed_password = make_password(password)
         try:
             user = User.objects.get(username=username)
             if not user.display_name:
-                user.display_name = data['displayName']
+                user.display_name = data['providerData'][0]['displayName']
                 user.save()
         except User.DoesNotExist:
             user = User(
