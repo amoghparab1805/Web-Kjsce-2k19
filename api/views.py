@@ -13,11 +13,11 @@ class SignUp(APIView):
     def post(self, request, *args, **kwargs):
         data = request.data
         username = data['uid']
-        display_name = data['displayName']
-        email = data['email']
-        phone_number = data['phoneNumber']
-        photo_url = data['photoURL']
-        provider_id = data['providerId']
+        display_name = data['providerData']['displayName']
+        email = data['providerData']['email']
+        phone_number = data['providerData']['phoneNumber']
+        photo_url = data['providerData']['photoURL']
+        provider_id = data['providerData']['providerId']
         password = "pass@123"
         hashed_password = make_password(password)
         try:
