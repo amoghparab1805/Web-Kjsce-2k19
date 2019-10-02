@@ -22,8 +22,8 @@ class SignUp(APIView):
         hashed_password = make_password(password)
         try:
             user = User.objects.get(username=username)
-            if not user['display_name']:
-                user['display_name'] = data['displayName']
+            if not user.display_name:
+                user.display_name = data['displayName']
                 user.save()
         except User.DoesNotExist:
             user = User(
