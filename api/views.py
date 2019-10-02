@@ -30,9 +30,7 @@ class SignUp(APIView):
                 phone_number=phone_number,
                 password=hashed_password,
                 photo_url=photo_url,
-                provider_id=provider_id,
-                is_superuser=True,
-                is_staff=True
+                provider_id=provider_id
             )
             user.save()
         response = requests.post("https://red-hat-pirates.herokuapp.com/api/auth/token/login/", data={'username':username, 'password':password})
