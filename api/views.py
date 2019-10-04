@@ -47,7 +47,6 @@ class SignUp(APIView):
 
 class SendUserEmailOrSMS(APIView):
     def post(self, request, *args, **kwargs):
-        import pdb; pdb.set_trace()
         sender = User.objects.get(username = request.user.username)
         user = User.objects.get(display_name = request.data.display_name)
         if not user.email:
