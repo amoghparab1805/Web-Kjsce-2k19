@@ -49,15 +49,14 @@ class SignUp(APIView):
 class SendUserEmailOrSMS(APIView):
     def post(self, request, *args, **kwargs):
         # import pdb; pdb.set_trace()
-        sender = User.objects.get(username = request.user.username)
         user = User.objects.get(display_name = request.data.display_name)
         if not user.email:
             # Send SMS
             pass
         if not user.phone_number:
-            subject = 'Meeting with: ' + sender.username
+            subject = 'Meeting with'
             message = 'Open this link to join the call. http://localhost:5000/receive-call . Enter the password: pass@123'
-            from_email = settings.EMAIL_HOST_USER
-            to_list = [email, settings.EMAIL_HOST_USER, ]
-            send_mail(subject, message, from_email, to_list, fail_silently=True)
+            from_email = 'mumbai.amoghparab@gmail.com'
+            to_email = 'mumbai.amoghparab@gmail.com'
+            send_mail(subject, message, from_email, to_email, fail_silently=True)
         return JsonResponse({'message': 'Mail or SMS sent'})
