@@ -45,18 +45,3 @@ class SignUp(APIView):
             'user': user.username, # TODO : Make serializer for user
             'token': token["auth_token"]
         })
-
-class SendUserEmailOrSMS(APIView):
-    def post(self, request, *args, **kwargs):
-        # import pdb; pdb.set_trace()
-        user = User.objects.get(display_name = request.data.display_name)
-        if not user.email:
-            # Send SMS
-            pass
-        if not user.phone_number:
-            subject = 'Meeting with'
-            message = 'Open this link to join the call. http://localhost:5000/receive-call . Enter the password: pass@123'
-            from_email = settings.EMAIL_HOST_USER
-            to_email = 'mumbai.amoghparab@gmail.com'
-            send_mail(subject, message, from_email, to_email, fail_silently=True)
-        return JsonResponse({'message': 'Mail or SMS sent'})
