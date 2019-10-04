@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework import generics, viewsets, permissions, status
 from django.http import HttpResponse, JsonResponse
+from django.core.mail import send_mail
 from django.contrib.auth.hashers import make_password
 from rest_framework.response import Response
 import requests
