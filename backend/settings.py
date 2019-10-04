@@ -152,3 +152,10 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 django_heroku.settings(locals())
 del DATABASES['default']['OPTIONS']['sslmode']
+
+# Email Config
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'YOUR_EMAIL'
+EMAIL_HOST_PASSWORD = 'YOUR_PASSWORD'
+EMAIL_USE_TLS = True

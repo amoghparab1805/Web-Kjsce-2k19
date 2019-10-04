@@ -39,7 +39,19 @@ class SignUp(APIView):
         response = requests.post("https://red-hat-pirates.herokuapp.com/api/auth/token/login/", data={'username':username, 'password':password})
         token = response.json()
         return JsonResponse({
-            'Success': 'Success',
+            'message': 'Success',
             'user': user.username, # TODO : Make serializer for user
             'token': token["auth_token"]
         })
+
+class SendUserEmailOrSMS(APIView):
+    def post(self, request, *args, **kwargs):
+        import pdb; pdb.set_trace()
+        user = User.objects.get(display_name = request.data.display_name)
+        if not user.email:
+            # Send SMS
+            pass
+        if not user.phone_number:
+            # Send Mail
+            pass
+        return JsonResponse({'message': 'Mail or SMS sent'})
