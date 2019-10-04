@@ -9,6 +9,7 @@ import requests
 import json
 from .models import *
 from .serializers import *
+from backend import settings
 
 class SignUp(APIView):
     def post(self, request, *args, **kwargs):
