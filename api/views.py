@@ -56,7 +56,7 @@ class SendUserEmailOrSMS(APIView):
         if not user.phone_number:
             subject = 'Meeting with'
             message = 'Open this link to join the call. http://localhost:5000/receive-call . Enter the password: pass@123'
-            from_email = 'mumbai.amoghparab@gmail.com'
+            from_email = settings.EMAIL_HOST_USER
             to_email = 'mumbai.amoghparab@gmail.com'
             send_mail(subject, message, from_email, to_email, fail_silently=True)
         return JsonResponse({'message': 'Mail or SMS sent'})
