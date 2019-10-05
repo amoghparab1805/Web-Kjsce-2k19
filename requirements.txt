@@ -39,3 +39,4 @@ pandas
 sklearn
 seaborn
 yfinance
+python-craigslist

@@ -21,6 +21,7 @@ class ExpenditureSerializer(serializers.ModelSerializer):
         model = Expenditure
         fields = [
             'amount',
-            'expenditure_type',
-            'date'
+            'type',
+            'date',
+            'user_id'
         ]

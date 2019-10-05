@@ -19,6 +19,6 @@ class User(AbstractUser):
 
 class Expenditure(TimeStampedModel):
     amount = models.CharField(max_length=150)
-    expenditure_type = models.CharField(max_length=150, choices=EXPENDITURE_CHOICES)
+    type = models.CharField(max_length=150, choices=EXPENDITURE_CHOICES)
     date = models.DateField(default=date.today)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

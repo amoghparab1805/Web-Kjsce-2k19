@@ -12,7 +12,8 @@ from .serializers import *
 from backend import settings
 from .serializers import *
 from datetime import datetime
-
+from craigslist import CraigslistHousing
+ 
 class SignUp(APIView):
     def post(self, request, *args, **kwargs):
         data = request.data
@@ -85,9 +86,6 @@ class UpdateUser(APIView):
             'message': 'Success'
         })
 
-        
-# Add Expenditure
-# 
 
 class AddExpenditure(APIView):
     
@@ -98,17 +96,23 @@ class AddExpenditure(APIView):
         date = data['date']
         date_object = datetime.strptime(date, '%Y-%m-%d').date()
         uid = data['uid']
-        expenditure_type = data['expenditure_type']
+        type = data['type']
 
-        user = User.objects.get(username=uid)
+        if(type!='income'):
 
-        expenditure = Expenditure(
-            amount=amount,
-            expenditure_type=expenditure_type,
-            date=date,
-            user=user
-        )
-        expenditure.save()
+            user = User.objects.get(username=uid)
+
+            expenditure = Expenditure(
+                amount=amount,
+                type=type,
+                date=date,
+                user=user
+            )
+            expenditure.save()
+        else:
+            user = User.objects.get(username=uid)
+            user.income = amount
+            user.save()
 
         return JsonResponse({
             'message': 'Succcess'
@@ -117,29 +121,25 @@ class AddExpenditure(APIView):
 
 class GetExpenditures(APIView):
 
-    def post(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
 
-        data = request.data
-
-        uid = data['uid']
+        uid = kwargs['uid']
         user = User.objects.get(username=uid)
 
-        necessities_expenditures = Expenditure.objects.filter(user=user, expenditure_type='necessities')
-        shopping_expenditures = Expenditure.objects.filter(user=user, expenditure_type='shopping')
-        bills_expenditures = Expenditure.objects.filter(user=user, expenditure_type='bills')
-        tax_expenditures = Expenditure.objects.filter(user=user, expenditure_type='tax')
-        insurance_expenditures = Expenditure.objects.filter(user=user, expenditure_type='insurance')
+        expenditures = Expenditure.objects.filter(user=user)
 
-        necessities_expenditures_serializer = ExpenditureSerializer(necessities_expenditures, many=True)
-        shopping_expenditures_serializer = ExpenditureSerializer(shopping_expenditures, many=True)
-        bills_expenditures_serializer = ExpenditureSerializer(bills_expenditures, many=True)
-        tax_expenditures_serializer = ExpenditureSerializer(tax_expenditures, many=True)
-        insurance_expenditures_serializer = ExpenditureSerializer(insurance_expenditures, many=True)
+        expenditures_serializer = ExpenditureSerializer(expenditures, many=True)
 
-        return JsonResponse({
-            'necessities': necessities_expenditures_serializer.data,
-            'shopping': shopping_expenditures_serializer.data,
-            'bills': bills_expenditures_serializer.data,
-            'tax': tax_expenditures_serializer.data,
-            'insurance': insurance_expenditures_serializer.data,
-        })
+        return JsonResponse(expenditures_serializer.data, safe=False)
+
+class GetHousing(APIView):
+
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        city = data['city']
+        max_price = data['max_price']
+        city = city.lower()
+        max_price = int(max_price)
+        cl = CraigslistHousing(site=city, category='apa', filters={'max_price': max_price})
+        results = cl.get_results(sort_by='newest')
+
