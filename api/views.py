@@ -22,11 +22,18 @@ class SignUp(APIView):
         provider_id = data['providerId']
         password = "pass@123"
         hashed_password = make_password(password)
+        if(provider_id=='phone'):
+            age = data['age']
+            gender = data['gender']
+        else:
+            age = None
+            gender = None
         try:
             user = User.objects.get(username=username)
             if not user.display_name:
                 user.display_name = data['displayName']
                 user.save()
+            is_new_user = False
         except User.DoesNotExist:
             user = User(
                 username=username,
@@ -35,13 +42,28 @@ class SignUp(APIView):
                 phone_number=phone_number,
                 password=hashed_password,
                 photo_url=photo_url,
-                provider_id=provider_id
+                provider_id=provider_id,
+                age=age,
+                gender=gender
             )
             user.save()
+            is_new_user = True
         response = requests.post("https://red-hat-pirates.herokuapp.com/api/auth/token/login/", data={'username':username, 'password':password})
         token = response.json()
         return JsonResponse({
             'message': 'Success',
             'user': user.username, # TODO : Make serializer for user
-            'token': token["auth_token"]
+            'token': token["auth_token"],
+            'is_new_user': is_new_user
         })
+
+class UpdateUser(generics.GenericAPIView):
+
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        username = data['uid']
+        age = data['age']
+        gender = data['gender']
+
+
+        
