@@ -1,13 +1,8 @@
 from django.db import models
 from django_extensions.db.models import TimeStampedModel
 from django.contrib.auth.models import AbstractUser
-<<<<<<< HEAD
-from datetime import date
 from .choices import GENDER_CHOICES, EXPENDITURE_CHOICES
-=======
-from .choices import GENDER_CHOICES
 from datetime import date
->>>>>>> 999e5ed22f6912d69946c7c7ebdf6f5fc26b9c4e
 
 class User(AbstractUser):
     phone_number = models.CharField(max_length=20, null=True)
@@ -24,6 +19,6 @@ class User(AbstractUser):
 
 class Expenditure(TimeStampedModel):
     amount = models.CharField(max_length=150)
-    expenditure_type = models.CharField()
+    expenditure_type = models.CharField(max_length=150, choices=EXPENDITURE_CHOICES)
     date = models.DateField(default=date.today)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

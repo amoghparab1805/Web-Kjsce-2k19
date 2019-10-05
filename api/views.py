@@ -11,7 +11,7 @@ from .models import *
 from .serializers import *
 from backend import settings
 from .serializers import *
-import datetime
+from datetime import datetime
 
 class SignUp(APIView):
     def post(self, request, *args, **kwargs):
@@ -100,7 +100,7 @@ class AddExpenditure(APIView):
         uid = data['uid']
         expenditure_type = data['expenditure_type']
 
-        user = User.objects.get(uid=uid)
+        user = User.objects.get(username=uid)
 
         expenditure = Expenditure(
             amount=amount,
@@ -108,6 +108,7 @@ class AddExpenditure(APIView):
             date=date,
             user=user
         )
+        expenditure.save()
 
         return JsonResponse({
             'message': 'Succcess'
@@ -121,7 +122,7 @@ class GetExpenditures(APIView):
         data = request.data
 
         uid = data['uid']
-        user = User.objects.get(user=uid)
+        user = User.objects.get(username=uid)
 
         necessities_expenditures = Expenditure.objects.filter(user=user, expenditure_type='necessities')
         shopping_expenditures = Expenditure.objects.filter(user=user, expenditure_type='shopping')
