@@ -41,7 +41,7 @@ class SignUp(APIView):
             user.save()
             is_new_user = True
 
-        if(provider_id=='phone'):
+        if(provider_id=='phone' or provider_id=='firebase'):
             user.age = data['age']
             user.gender = data['gender']
             user.save()
@@ -58,9 +58,25 @@ class UpdateUser(generics.GenericAPIView):
 
     def post(self, request, *args, **kwargs):
         data = request.data
-        username = data['uid']
+        uid = data['uid']
+        display_name = data['displayName']
         age = data['age']
         gender = data['gender']
 
+        try:
+            user = User.objects.get(uid=uid)
+            user.display_name = display_name
+            user.age = age
+            user.gender = gender
+            user.save()
+
+        except User.DoesNotExist:
+            return JsonResponse({
+                'message' : 'Authentication Error'
+            })
+
+        return JsonResponse({
+            'message': 'Success'
+        })
 
         
