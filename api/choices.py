@@ -3,3 +3,7 @@ GENDER_CHOICES = (
     ('F', 'Female'),
     ('O', 'Other')
 )
+
+EXPENDITURE_CHOICES = (
+    ('food', 'food')
+)
