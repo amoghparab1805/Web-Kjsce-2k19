@@ -10,6 +10,7 @@ import json
 from .models import *
 from .serializers import *
 from backend import settings
+from .serializers import UserSerializer
 
 class SignUp(APIView):
     def post(self, request, *args, **kwargs):
@@ -47,9 +48,11 @@ class SignUp(APIView):
 
         response = requests.post("https://red-hat-pirates.herokuapp.com/api/auth/token/login/", data={'username':username, 'password':password})
         token = response.json()
+        
+        serializer = UserSerializer(user)
         return JsonResponse({
             'message': 'Success',
-            'user': user.username, # TODO : Make serializer for user
+            'user': serializer.data,
             'token': token["auth_token"],
             'is_new_user': is_new_user
         })
