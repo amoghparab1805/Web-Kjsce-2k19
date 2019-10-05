@@ -48,7 +48,7 @@ class SignUp(APIView):
 
         response = requests.post("https://red-hat-pirates.herokuapp.com/api/auth/token/login/", data={'username':username, 'password':password})
         token = response.json()
-        
+
         serializer = UserSerializer(user)
         return JsonResponse({
             'message': 'Success',
@@ -67,7 +67,7 @@ class UpdateUser(generics.GenericAPIView):
         gender = data['gender']
 
         try:
-            user = User.objects.get(uid=uid)
+            user = User.objects.get(username=uid)
             user.display_name = display_name
             user.age = age
             user.gender = gender

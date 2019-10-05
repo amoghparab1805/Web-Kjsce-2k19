@@ -12,5 +12,6 @@ class UserSerializer(serializers.ModelSerializer):
             'email',
             'display_name',
             'age',
-            'gender'
+            'gender',
+            'username'
         ]
