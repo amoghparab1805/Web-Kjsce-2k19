@@ -57,7 +57,7 @@ class SignUp(APIView):
             'is_new_user': is_new_user
         })
 
-class UpdateUser(generics.GenericAPIView):
+class UpdateUser(APIView):
 
     def post(self, request, *args, **kwargs):
         data = request.data
