@@ -22,12 +22,6 @@ class SignUp(APIView):
         provider_id = data['providerId']
         password = "pass@123"
         hashed_password = make_password(password)
-        if(provider_id=='phone'):
-            age = data['age']
-            gender = data['gender']
-        else:
-            age = None
-            gender = None
         try:
             user = User.objects.get(username=username)
             if not user.display_name:
@@ -42,12 +36,15 @@ class SignUp(APIView):
                 phone_number=phone_number,
                 password=hashed_password,
                 photo_url=photo_url,
-                provider_id=provider_id,
-                age=age,
-                gender=gender
+                provider_id=provider_id
             )
             user.save()
             is_new_user = True
+
+        if(provider_id=='phone'):
+            user.age = data['age']
+            user.gender = data['gender']
+            user.save()
         response = requests.post("https://red-hat-pirates.herokuapp.com/api/auth/token/login/", data={'username':username, 'password':password})
         token = response.json()
         return JsonResponse({
