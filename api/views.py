@@ -141,5 +141,7 @@ class GetHousing(APIView):
         city = city.lower()
         max_price = int(max_price)
         cl = CraigslistHousing(site=city, category='apa', filters={'max_price': max_price})
-        results = cl.get_results(sort_by='newest')
+        results = cl.get_results(sort_by='newest', geotagged=True, limit=5)
+
+        return JsonResponse(results)
 
