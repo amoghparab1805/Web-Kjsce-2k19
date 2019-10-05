@@ -5,5 +5,9 @@ GENDER_CHOICES = (
 )
 
 EXPENDITURE_CHOICES = (
-    ('food', 'food')
+    ('necessities', 'necessities'),
+    ('shopping', 'shopping'),
+    ('bills', 'bills'),
+    ('tax', 'tax'),
+    ('insurance', 'insurance')
 )

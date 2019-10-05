@@ -10,7 +10,8 @@ import json
 from .models import *
 from .serializers import *
 from backend import settings
-from .serializers import UserSerializer
+from .serializers import *
+import datetime
 
 class SignUp(APIView):
     def post(self, request, *args, **kwargs):
@@ -20,6 +21,8 @@ class SignUp(APIView):
         email = data['email']
         phone_number = data['phoneNumber']
         photo_url = data['photoURL']
+        if(photo_url == None):
+            photo_url = ''
         provider_id = data['providerId']
         password = "pass@123"
         hashed_password = make_password(password)
@@ -83,3 +86,59 @@ class UpdateUser(APIView):
         })
 
         
+# Add Expenditure
+# 
+
+class AddExpenditure(APIView):
+    
+    def post(self, request, *args, **kwargs):
+        data = request.data
+
+        amount = data['amount']
+        date = data['date']
+        date_object = datetime.strptime(date, '%Y-%m-%d').date()
+        uid = data['uid']
+        expenditure_type = data['expenditure_type']
+
+        user = User.objects.get(uid=uid)
+
+        expenditure = Expenditure(
+            amount=amount,
+            expenditure_type=expenditure_type,
+            date=date,
+            user=user
+        )
+
+        return JsonResponse({
+            'message': 'Succcess'
+        })
+            
+
+class GetExpenditures(APIView):
+
+    def post(self, request, *args, **kwargs):
+
+        data = request.data
+
+        uid = data['uid']
+        user = User.objects.get(user=uid)
+
+        necessities_expenditures = Expenditure.objects.filter(user=user, expenditure_type='necessities')
+        shopping_expenditures = Expenditure.objects.filter(user=user, expenditure_type='shopping')
+        bills_expenditures = Expenditure.objects.filter(user=user, expenditure_type='bills')
+        tax_expenditures = Expenditure.objects.filter(user=user, expenditure_type='tax')
+        insurance_expenditures = Expenditure.objects.filter(user=user, expenditure_type='insurance')
+
+        necessities_expenditures_serializer = ExpenditureSerializer(necessities_expenditures, many=True)
+        shopping_expenditures_serializer = ExpenditureSerializer(shopping_expenditures, many=True)
+        bills_expenditures_serializer = ExpenditureSerializer(bills_expenditures, many=True)
+        tax_expenditures_serializer = ExpenditureSerializer(tax_expenditures, many=True)
+        insurance_expenditures_serializer = ExpenditureSerializer(insurance_expenditures, many=True)
+
+        return JsonResponse({
+            'necessities': necessities_expenditures_serializer.data,
+            'shopping': shopping_expenditures_serializer.data,
+            'bills': bills_expenditures_serializer.data,
+            'tax': tax_expenditures_serializer.data,
+            'insurance': insurance_expenditures_serializer.data,
+        })

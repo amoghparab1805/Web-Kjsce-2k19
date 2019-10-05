@@ -29,3 +29,4 @@ class UserAdmin(UserAdmin):
     )
 
 admin.site.register(User)
+admin.site.register(Expenditure)
