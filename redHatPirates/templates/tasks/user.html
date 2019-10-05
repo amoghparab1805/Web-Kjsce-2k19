@@ -45,6 +45,21 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
   </head>
+  <style>
+        .profilecard {
+          box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+          transition: 0.3s;
+          width: 80%;
+        }
+        
+        .card:hover {
+          box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+        
+        .container {
+          padding: 2px 16px;
+        }
+        </style>
 
   <body>
     <!-- Sidebar -->
@@ -190,7 +205,13 @@
               <div class="card shadow border-0">
                 <div class="card-body p-5">
                   <h6 class="h3 text-black text-center text-uppercase mb-5">
-                    
+                    <div class="profilecard">
+                        <img src="https://img.buzzfeed.com/buzzfeed-static/static/2017-06/6/15/enhanced/buzzfeed-prod-fastlane-03/enhanced-12675-1496778128-4.jpg?downsize=700:*&output-format=auto&output-quality=auto" alt="Avatar" style="width:100%">
+                        <div class="container">
+                          <h4><b>John Doe</b></h4> 
+                          <p>Architect & Engineer</p> 
+                        </div>
+                      </div>
                   </h6>
                   <div
                     id="chartContainer"
@@ -267,7 +288,7 @@
     <script src="{% static 'assets/vendor/nouislider/js/nouislider.min.js' %}"></script>
     <script src="{% static 'assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js' %}"></script>
     <!-- Argon JS -->
-    <script src="{% static 'assets/js/argon.min.js' %}"></script>
+    <!-- <script src="{% static 'assets/js/argon.min.js' %}"></script>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <script>
       window.onload = function () {
@@ -297,7 +318,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
   legend: {
     cursor:"pointer",
     itemclick: toggleDataSeries
-  },
+  }, 
   data: [{
     type: "column",
     name: "3 year investment",
@@ -337,7 +358,7 @@ function toggleDataSeries(e) {
   }
   chart.render();
 }
-      };
+      };-->
     </script>
   </body>
 </html>

@@ -190,7 +190,11 @@
               <div class="card shadow border-0">
                 <div class="card-body p-5">
                   <h6 class="h3 text-black text-center text-uppercase mb-5">
-                    
+                    ENTER YOUR PREFERED CITY AND MAXIMUM BUDGET FOR VIEWING VARIOUS HOUSING OPTIONS:
+                    <form>
+                       Enter the city name <input type="text" name="city">
+                        Enter the maximum budget<input type="text" name="city">
+                    </form>
                   </h6>
                   <div
                     id="chartContainer"
@@ -268,9 +272,9 @@
     <script src="{% static 'assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js' %}"></script>
     <!-- Argon JS -->
     <script src="{% static 'assets/js/argon.min.js' %}"></script>
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+   <!-- <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <script>
-      window.onload = function () {
+     window.onload = function () {
 
 var chart = new CanvasJS.Chart("chartContainer", {
   animationEnabled: true,
@@ -337,7 +341,7 @@ function toggleDataSeries(e) {
   }
   chart.render();
 }
-      };
+      };-->
     </script>
   </body>
 </html>

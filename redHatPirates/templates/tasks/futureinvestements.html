@@ -45,6 +45,20 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
   </head>
+  <style>.button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+      }
+      .button {border-radius: 12px;}
+      </style>
 
   <body>
     <!-- Sidebar -->
@@ -190,7 +204,8 @@
               <div class="card shadow border-0">
                 <div class="card-body p-5">
                   <h6 class="h3 text-black text-center text-uppercase mb-5">
-                    
+                    <a class="button" href="{% url 'realestate' %}">Select to view Real Estate options</a>
+                    <a class="button" href="">Select to view Safer Investment Options</a>
                   </h6>
                   <div
                     id="chartContainer"
@@ -268,9 +283,9 @@
     <script src="{% static 'assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js' %}"></script>
     <!-- Argon JS -->
     <script src="{% static 'assets/js/argon.min.js' %}"></script>
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <!-- <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <script>
-      window.onload = function () {
+    window.onload = function () {
 
 var chart = new CanvasJS.Chart("chartContainer", {
   animationEnabled: true,
@@ -337,7 +352,7 @@ function toggleDataSeries(e) {
   }
   chart.render();
 }
-      };
+      };-->
     </script>
   </body>
 </html>
