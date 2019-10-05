@@ -11,6 +11,7 @@ from .models import *
 from .serializers import *
 from backend import settings
 from .serializers import *
+import datetime
 
 class SignUp(APIView):
     def post(self, request, *args, **kwargs):
@@ -95,6 +96,7 @@ class AddExpenditure(APIView):
 
         amount = data['amount']
         date = data['date']
+        date_object = datetime.strptime(date, '%Y-%m-%d').date()
         uid = data['uid']
         expenditure_type = data['expenditure_type']
 
