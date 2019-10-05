@@ -1,5 +1,5 @@
 GENDER_CHOICES = (
-    ('male', 'male'),
-    ('female', 'female'),
-    ('other', 'other')
+    ('M', 'Male'),
+    ('F', 'Female'),
+    ('O', 'Other')
 )
