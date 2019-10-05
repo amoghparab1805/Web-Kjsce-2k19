@@ -2,5 +2,5 @@ from django.shortcuts import render
 
 # Create your views here.
 
-class Dashboard():
-    pass
+def dashboard(request):
+    return render(request, 'redHatPirates/tasks/dashboard.html')
