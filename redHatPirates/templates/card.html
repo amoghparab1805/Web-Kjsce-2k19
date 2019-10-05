@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      name="description"
+      content="Start your development with a Design System for Bootstrap 4."
+    />
+    <meta name="author" content="Creative Tim" />
+    <title>Argon Design System - Free Design System for Bootstrap 4</title>
+    <!-- Favicon -->
+    <link
+      href="{% static 'assets/img/brand/favicon.png' %}"
+      rel="icon"
+      type="image/png"
+    />
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
+      rel="stylesheet"
+    />
+    <!-- Icons -->
+    <link
+      href="{% static 'assets/vendor/nucleo/css/nucleo.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'assets/vendor/font-awesome/css/font-awesome.min.css' %}"
+      rel="stylesheet"
+    />
+    <!-- Argon CSS -->
+    <link
+      type="text/css"
+      href="{% static 'assets/css/argon.min.css' %}"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
+  </head>
+  <body>
+      <div class="row align-items-center justify-content-center" style="height: 100vh;">
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-lg-5">
+                <div class="card bg-secondary shadow border-0 py-5">
+                  <div class="card-body px-lg-5 py-lg-5">
+                    <div class="text-center text-muted mb-4">
+                      <small class="h3">Payment Info</small>
+                    </div>
+                    <form action="{% url 'donations:charge' %}" method="POST" role="form">
+                        {% csrf_token %}
+                        <div class="form-group mb-3">
+                        <div class="input-group input-group-alternative">
+                          <input
+                            class="form-control"
+                            placeholder="Email"
+                            type="email"
+                            name="email"
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group mb-3">
+                          <div class="input-group input-group-alternative">
+                            <input
+                              class="form-control"
+                              placeholder="Amount"
+                              type="text"
+                              name="amount"
+                            />
+                          </div>
+                        </div>
+                      <div class="form-group mb-3">
+                          <div class="input-group input-group-alternative">
+                            <input
+                              class="form-control"
+                              placeholder="Card No."
+                              type="text"
+                              name="card"
+                            />
+                          </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <div class="input-group input-group-alternative">
+                              <input
+                                class="form-control"
+                                placeholder="MM/YY"
+                                type="text"
+                                name="expiry"
+                              />
+                            </div>
+                          </div>
+                          <div class="form-group mb-3">
+                              <div class="input-group input-group-alternative">
+                                <input
+                                  class="form-control"
+                                  placeholder="CVV"
+                                  type="password"
+                                  name="cvv"
+                                />
+                              </div>
+                            </div>
+                      <div class="text-center">
+                        <button type="submit" class="btn btn-primary my-4">
+                          Submit
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+      </div>
+    </div>
+
+    <!-- Core -->
+    <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/popper/popper.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/headroom/headroom.min.js' %}"></script>
+    <!-- Optional JS -->
+    <script src="{% static 'assets/vendor/onscreen/onscreen.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/nouislider/js/nouislider.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js' %}"></script>
+    <!-- Argon JS -->
+    <script src="{% static 'assets/js/argon.min.js' %}"></script>
+  </body>
+</html>

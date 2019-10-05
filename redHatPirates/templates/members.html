@@ -1,0 +1,314 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      name="description"
+      content="Start your development with a Design System for Bootstrap 4."
+    />
+    <meta name="author" content="Creative Tim" />
+    <title>Argon Design System - Free Design System for Bootstrap 4</title>
+    <!-- Favicon -->
+    <link
+      href="{% static 'assets/img/brand/favicon.png' %}"
+      rel="icon"
+      type="image/png"
+    />
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
+      rel="stylesheet"
+    />
+    <!-- Icons -->
+    <link
+      href="{% static 'assets/vendor/nucleo/css/nucleo.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'assets/vendor/font-awesome/css/font-awesome.min.css' %}"
+      rel="stylesheet"
+    />
+    <!-- Argon CSS -->
+    <link
+      type="text/css"
+      href="{% static 'assets/css/argon.min.css' %}"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
+  </head>
+
+  <body>
+    <!-- Sidebar -->
+    <div class="row">
+      <div class="col-md-2">
+        <div class="row justify-content-center bg-primary">
+          <div class="logo">
+            <a class="h3 text-white text-center" href="{% url 'dashboard' %}"
+              >SeeLife</a
+            >
+          </div>
+        </div>
+        <div class="sidebar">
+          <div class="row justify-content-center">
+            <a
+              class="h3 heading mt-3 mb-2 btn btn-link text-default"
+              href="{% url 'dashboard' %}"
+              >Home</a
+            >
+          </div>
+          <div class="dropdown-divider mx-3"></div>
+          <div class="row justify-content-center font-bold">
+            <a
+              class="h3 heading mt-3 mb-2 btn btn-link text-primary"
+              href="{% url 'accounts:members' %}"
+              >Members</a
+            >
+          </div>
+          <div class="dropdown-divider mx-3"></div>
+          <div class="row justify-content-center">
+            <a
+              class="h3 heading mt-3 mb-2 btn btn-link text-default"
+              href="{% url 'accounts:volunteers' %}"
+              >Volunteers</a
+            >
+          </div>
+          <div class="dropdown-divider mx-3"></div>
+          <div class="row justify-content-center">
+            <a
+              class="h3 heading mt-3 mb-2 btn btn-link text-default"
+              href="{% url 'accounts:donors' %}"
+              >Donors</a
+            >
+          </div>
+          <div class="dropdown-divider mx-3"></div>
+          <div class="row justify-content-center">
+            <a
+              class="h3 heading mt-3 mb-2 btn btn-link text-default"
+              href="{% url 'forum:list' %}"
+              >Forum</a
+            >
+          </div>
+          <div class="dropdown-divider mx-3"></div>
+          <div class="row justify-content-center">
+            <a
+              class="h3 heading mt-3 mb-2 btn btn-link text-default"
+              href="{% url 'attendance' %}"
+              >Attendance</a
+            >
+          </div>
+          <div class="dropdown-divider mx-3"></div>
+        </div>
+      </div>
+      <div class="col-md-10 px-0">
+        <div class="row">
+          <div class="col">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+              <!-- <div class="container"> -->
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbar-default"
+                aria-controls="navbar-default"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbar-default">
+                <div class="navbar-collapse-header">
+                  <div class="row">
+                    <div class="col-6 collapse-brand"></div>
+                    <div class="col-6 collapse-close">
+                      <button
+                        type="button"
+                        class="navbar-toggler"
+                        data-toggle="collapse"
+                        data-target="#navbar-default"
+                        aria-controls="navbar-default"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                      >
+                        <span></span>
+                        <span></span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <ul class="navbar-nav ml-lg-auto mr-5">
+                  <li class="nav-item dropdown">
+                    <a
+                      class="nav-link nav-link-icon"
+                      href="#"
+                      id="navbar-default_dropdown_1"
+                      role="button"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <i class="ni ni-single-02"></i>
+                      <span class="nav-link-inner--text">{{ user.name }}</span>
+                    </a>
+                    <div
+                      class="dropdown-menu dropdown-menu-right"
+                      aria-labelledby="navbar-default_dropdown_1"
+                    >
+                      <a
+                        class="dropdown-item"
+                        href="javascript:{document.getElementById('logout').submit()}"
+                        >Logout</a
+                      >
+                      <form
+                        action="{% url 'accounts:logout' %}"
+                        method="POST"
+                        id="logout"
+                      >
+                        {% csrf_token %}
+                        <input type="hidden" />
+                      </form>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <!-- </div> -->
+            </nav>
+          </div>
+        </div>
+        <div class="container-fluid">
+          <div class="row justify-content-center">
+            <div class="col-lg-10 col-md-12 mt-4">
+              <div class="card shadow border-0">
+                <div class="card-body p-5">
+                  <h6 class="h3 text-black text-center text-uppercase mb-5">
+                    Members
+                  </h6>
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Time Since</th>
+                        <th scope="col">Details</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for member in members %}
+                      <tr>
+                        <td>{{ member.name }}</td>
+                        <td>{{ member.email }}</td>
+                        <td>{{ member.timestamp | timesince }}</td>
+                        <td>
+                          <button
+                            type="button"
+                            class="btn btn-link mb-3 px-0"
+                            data-toggle="modal"
+                            data-target="#modal-default"
+                          >
+                            View More
+                          </button>
+                          <div
+                            class="modal fade"
+                            id="modal-default"
+                            tabindex="-1"
+                            role="dialog"
+                            aria-labelledby="modal-default"
+                            aria-hidden="true"
+                          >
+                            <div
+                              class="modal-dialog modal- modal-dialog-centered modal-"
+                              role="document"
+                            >
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h6
+                                    class="h3 modal-title"
+                                    id="modal-title-default"
+                                  >
+                                    Details
+                                  </h6>
+                                  <button
+                                    type="button"
+                                    class="close"
+                                    data-dismiss="modal"
+                                    aria-label="Close"
+                                  >
+                                    <span aria-hidden="true">×</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="row align-items-center">
+                                    <div class="col-md-5">
+                                      <img
+                                        src="{% static 'assets/img/theme/team-1-800x800.jpg' %}"
+                                        alt="Circle image"
+                                        class="img-fluid rounded-circle shadow"
+                                        style="width: 150px;"
+                                      />
+                                    </div>
+                                    <div class="col-md-7">
+                                      <p class="lead">
+                                        <span class="font-weight-bold"
+                                          >Name:</span
+                                        >
+                                        {{ member.name }}
+                                      </p>
+                                      <p class="lead">
+                                        <span class="font-weight-bold"
+                                          >Phone:</span
+                                        >
+                                        {{ member.phone }}
+                                      </p>
+                                      <p class="lead">
+                                        <span class="font-weight-bold"
+                                          >Email:</span
+                                        >
+                                        {{ member.email }}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button
+                                    type="button"
+                                    class="btn btn-primary ml-auto"
+                                    data-dismiss="modal"
+                                  >
+                                    Close
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Core -->
+    <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/popper/popper.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/headroom/headroom.min.js' %}"></script>
+    <!-- Optional JS -->
+    <script src="{% static 'assets/vendor/onscreen/onscreen.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/nouislider/js/nouislider.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js' %}"></script>
+    <!-- Argon JS -->
+    <script src="{% static 'assets/js/argon.min.js' %}"></script>
+  </body>
+</html>
