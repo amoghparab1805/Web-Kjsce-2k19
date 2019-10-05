@@ -15,3 +15,12 @@ class UserSerializer(serializers.ModelSerializer):
             'gender',
             'username'
         ]
+
+class ExpenditureSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Expenditure
+        fields = [
+            'amount',
+            'expenditure_type',
+            'date'
+        ]
